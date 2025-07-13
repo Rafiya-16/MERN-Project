@@ -41,7 +41,7 @@ const Home = () => {
       
       {posts.length === 0 ? (
         <Text textAlign="center" color="gray.500" py={8}>
-          No posts yet. Be the first to share something!
+          No posts yet. Be the first to share something that's on your mind!
         </Text>
       ) : (
         posts.map((post) => (

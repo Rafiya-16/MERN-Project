@@ -44,14 +44,14 @@ const Signup = () => {
       await signUp(email, password, username, fullName);
       navigate('/');
       toast({
-        title: 'Account created!',
+        title: 'Your account created successfully!',
         description: 'Welcome to SocialApp!',
         status: 'success',
         duration: 3000,
       });
     } catch (error) {
       toast({
-        title: 'Signup failed',
+        title: 'Signup failed, try again',
         description: error.response?.data?.message || 'Something went wrong',
         status: 'error',
         duration: 3000,
@@ -86,7 +86,7 @@ const Signup = () => {
               bgGradient="linear(to-r, brand.400, brand.600)"
               bgClip="text"
             >
-              Join SocialApp
+              Join Our SocialApp
             </Heading>
             
             <VStack spacing={4} w="full">

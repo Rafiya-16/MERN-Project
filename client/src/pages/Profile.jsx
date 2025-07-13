@@ -29,7 +29,7 @@ const Profile = () => {
   
   const { user } = useAuth();
   const toast = useToast();
-  const bg = useColorModeValue('white', 'gray.800');
+  const bg = useColorModeValue('white', 'url("/dark-mode.jpg")');
   const borderColor = useColorModeValue('gray.200', 'gray.700');
 
   const fetchProfile = async () => {
@@ -117,24 +117,25 @@ const Profile = () => {
             <Text fontSize="2xl" fontWeight="bold">
               {profileUser.fullName}
             </Text>
-            <Text color="gray.500">@{profileUser.username}</Text>
+            <Text color="black">@{profileUser.username}</Text>
             {profileUser.bio && (
-              <Text textAlign="center" maxW="md">
+              <Text textAlign="center" maxW="md" >
                 {profileUser.bio}
               </Text>
             )}
           </VStack>
           
           <StatGroup>
-            <Stat textAlign="center">
+            <Stat textAlign="center" mr={2}>
               <StatNumber>{posts.length}</StatNumber>
               <StatLabel>Posts</StatLabel>
             </Stat>
-            <Stat textAlign="center">
+
+            <Stat textAlign="center" >
               <StatNumber>{profileUser.followersCount}</StatNumber>
               <StatLabel>Followers</StatLabel>
             </Stat>
-            <Stat textAlign="center">
+            <Stat textAlign="center" ml={2}>
               <StatNumber>{profileUser.followingCount}</StatNumber>
               <StatLabel>Following</StatLabel>
             </Stat>

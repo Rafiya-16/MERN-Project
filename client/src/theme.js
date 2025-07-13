@@ -10,7 +10,7 @@ const theme = extendTheme({
   styles: {
     global: (props) => ({
       body: {
-        bg: props.colorMode === 'dark' ? 'gray.900' : 'gray.50',
+        bg: props.colorMode === 'light' ? 'linear-gradient(180deg,rgba(155, 42, 153, 1) 0%, rgba(222, 129, 203, 0.99) 50%, rgba(242, 17, 107, 1) 100%)' : 'linear-gradient(to top right,  #8fe68fff, #a1e9ea, #81d4f3)',
       },
     }),
   },
@@ -20,18 +20,24 @@ const theme = extendTheme({
       100: '#e0f2fe',
       200: '#bae6fd',
       300: '#7dd3fc',
-      400: '#38bdf8',
-      500: '#0ea5e9',
-      600: '#0284c7',
-      700: '#0369a1',
+      400: '#f472b6',
+      500: '#e20ee9ff',
+      600: '#9333ea',
+      700: '#5a03a1ff',
       800: '#075985',
       900: '#0c4a6e',
     },
   },
   components: {
     Button: {
-      defaultProps: {
-        colorScheme: 'brand',
+     variants: {
+        solid: {
+          bgGradient: 'linear(to-r, pink.400, purple.400)',
+          color: 'white',
+          _hover: {
+            bgGradient: 'linear(to-r, pink.500, purple.500)',
+          },
+        },
       },
     },
   },

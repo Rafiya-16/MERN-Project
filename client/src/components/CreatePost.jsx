@@ -49,7 +49,7 @@ const CreatePost = ({ onPostCreated }) => {
       setShowImageUpload(false);
       
       toast({
-        title: 'Post created!',
+        title: 'Post created successfully!',
         status: 'success',
         duration: 2000,
       });
@@ -58,7 +58,7 @@ const CreatePost = ({ onPostCreated }) => {
     } catch (error) {
       console.error('Error creating post:', error);
       toast({
-        title: 'Error creating post',
+        title: 'Error creating post, try again',
         description: error.response?.data?.message || 'Something went wrong',
         status: 'error',
         duration: 3000,
@@ -149,7 +149,7 @@ const CreatePost = ({ onPostCreated }) => {
               resize="none"
               border="none"
               _focus={{ boxShadow: 'none' }}
-              fontSize="lg"
+              fontSize="xl"
               minH="80px"
               width="100%"
             />

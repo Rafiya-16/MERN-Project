@@ -83,7 +83,7 @@ const Login = () => {
               bgGradient="linear(to-r, brand.400, brand.600)"
               bgClip="text"
             >
-              Welcome Back
+              Welcome Back!
             </Heading>
             
             <VStack spacing={4} w="full">

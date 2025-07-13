@@ -52,6 +52,7 @@ router.get('/:userId/is-following', auth, async (req, res) => {
   }
 });
 
+
 // Follow/Unfollow user
 router.post('/:userId/follow', auth, async (req, res) => {
   try {

@@ -25,8 +25,7 @@ import {
   Button,
   Spinner,
 } from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { FiBell } from 'react-icons/fi';
+import { BellDot, BellOff, Home, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -35,14 +34,15 @@ const Layout = ({ children }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
-  const bg = useColorModeValue('white', 'gray.800');
+  const bg = useColorModeValue('white', 'transparent');
   const borderColor = useColorModeValue('gray.200', 'gray.700');
   
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
-
+  const [notificationsOn, setNotificationsOn] = useState(true);
+  const isLight = colorMode === 'light';
   // Fetch notifications when user is logged in
   useEffect(() => {
     if (user) {
@@ -120,20 +120,25 @@ const Layout = ({ children }) => {
         top={0}
         zIndex={10}
         backdropFilter="blur(8px)"
-        backgroundColor={useColorModeValue('rgba(255, 255, 255, 0.8)', 'rgba(26, 32, 44, 0.8)')}
+        backgroundColor={useColorModeValue('rgba(255, 255, 255, 0.8)', 'rgba(0, 0, 0, 1)')}
       >
         <Container maxW="container.md">
           <Flex h={16} alignItems="center" justifyContent="space-between">
-            <Heading
-              size="lg"
-              bgGradient="linear(to-r, brand.400, brand.600)"
-              bgClip="text"
-              cursor="pointer"
-              onClick={() => navigate('/')}
-            >
-              SocialApp
-            </Heading>
-
+           <HStack spacing={2}
+  cursor="pointer"
+  onClick={() => navigate('/')}
+>
+  <Home size={25} />
+  <Heading
+    size="lg"
+    fontFamily="'Pacifico', cursive"
+    bgGradient="linear(to-r, brand.400, brand.600)"
+    bgClip="text"
+    fontWeight="bold"
+  >
+    Snappin
+  </Heading>
+</HStack>
             {user && (
               <HStack spacing={4}>
                 <Popover
@@ -148,10 +153,10 @@ const Layout = ({ children }) => {
                   <PopoverTrigger>
                     <Box position="relative">
                       <IconButton
-                        aria-label="Notifications"
-                        icon={<FiBell />}
+                        aria-label="Toggle Notification icon"
+                        icon={notificationsOn ? <BellDot size={18} /> : <BellOff size={18} /> }
                         variant="ghost"
-                        onClick={fetchNotifications}
+                        onClick={() => setNotificationsOn(!notificationsOn)}
                       />
                       {unreadCount > 0 && (
                         <Badge
@@ -224,23 +229,37 @@ const Layout = ({ children }) => {
 
                 <IconButton
                   aria-label="Toggle color mode"
-                  icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                  icon={isLight ? <Moon size={20}/> : <Sun size={20}/>}
                   onClick={toggleColorMode}
                   variant="ghost"
                 />
 
                 <Menu>
-                  <MenuButton>
-                    <Avatar size="sm" name={user.fullName} src={user.avatarUrl} />
-                  </MenuButton>
-                  <MenuList>
-                    <MenuItem onClick={() => navigate(`/profile/${user.id}`)}>
-                      <Text>Profile</Text>
-                    </MenuItem>
-                    <MenuDivider />
-                    <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
-                  </MenuList>
-                </Menu>
+  <MenuButton>
+    <Box position="relative">
+      <Avatar size="sm" name={user.fullName} src={user.avatarUrl} />
+      {user.isOnline && (
+        <Box
+          position="absolute"
+          bottom="0"
+          right="0"
+          boxSize="10px"
+          bg="green.400"
+          border="2px solid white"
+          borderRadius="full"
+        />
+      )}
+    </Box>
+  </MenuButton>
+  <MenuList>
+    <MenuItem onClick={() => navigate(`/profile/${user.id}`)}>
+      <Text>Profile</Text>
+    </MenuItem>
+    <MenuDivider />
+    <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+  </MenuList>
+</Menu>
+
               </HStack>
             )}
 
@@ -248,7 +267,7 @@ const Layout = ({ children }) => {
               <HStack spacing={4}>
                 <IconButton
                   aria-label="Toggle color mode"
-                  icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                  icon={colorMode === 'light' ? <Moon /> : <Sun />}
                   onClick={toggleColorMode}
                   variant="ghost"
                 />
@@ -267,4 +286,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default Layout; 

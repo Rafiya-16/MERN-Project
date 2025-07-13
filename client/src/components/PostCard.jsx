@@ -235,16 +235,16 @@ const PostCard = ({ post, onUpdate }) => {
               <HStack key={comment._id} align="start">
                 <Avatar
                   size="sm"
-                  name={comment.author.fullName}
-                  src={comment.author.avatarUrl}
+                  name={comment.author?.fullName}
+                  src={comment.author?.avatarUrl}
                 />
                 <VStack align="start" spacing={1} flex={1}>
                   <HStack>
                     <Text fontSize="sm" fontWeight="bold">
-                      {comment.author.fullName}
+                      {comment.author?.fullName}
                     </Text>
                     <Text fontSize="xs" color="gray.500">
-                      @{comment.author.username}
+                      @{comment.author?.username}
                     </Text>
                   </HStack>
                   <Text fontSize="sm">{comment.content}</Text>
